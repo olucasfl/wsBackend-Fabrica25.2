@@ -1,0 +1,11 @@
+<h2>{{ treinador.nome }} (Nível {{ treinador.nivel }})</h2>
+<p>Idade: {{ treinador.idade }}</p>
+<p>Cidade: {{ treinador.cidade }}</p>
+
+{% comment %}
+<a href="{% url 'pokemons:captura' treinador.id %}">Capturar Pokémon</a>
+<a href="{% url 'pokemons:lista' treinador.id %}">Ver Pokémons Capturados</a>
+{% endcomment %}
+
+<a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a>
+<a href="{% url 'treinadores:home' %}">Ver treinadores registrados</a>

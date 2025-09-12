@@ -1,0 +1,6 @@
+<h1>Seja bem-vindo!</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Continuar</button>
+</form>
+<a href="{% url 'treinadores:lista' %}">Ver treinadores já registrados</a>

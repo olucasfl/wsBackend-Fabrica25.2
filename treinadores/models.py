@@ -1,7 +1,7 @@
 from django.db import models
 
 class Treinador(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=100, unique=True)
     idade = models.IntegerField()
     cidade = models.CharField(max_length=100)
     nivel = models.IntegerField(default=1)

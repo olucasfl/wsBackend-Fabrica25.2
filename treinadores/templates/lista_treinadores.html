@@ -1,0 +1,12 @@
+<h2>Todos os Treinadores</h2>
+<ul>
+  {% for treinador in treinadores %}
+  <li>
+    <a href="{% url 'treinadores:perfil' treinador.id %}">
+      {{ treinador.nome }} (Nível {{ treinador.nivel }})
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a>

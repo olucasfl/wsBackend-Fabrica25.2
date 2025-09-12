@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Treinador
 
-# Register your models here.
+@admin.register(Treinador)
+class TreinadorAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'idade', 'cidade', 'nivel')
+    search_fields = ('nome', 'cidade')
