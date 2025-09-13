@@ -9,12 +9,14 @@ O sistema integra-se com a **PokeAPI**, uma API pública da internet que fornece
 ## Tecnologias Utilizadas
 
 - **Backend:** Python 3 + Django  
-- **Banco de Dados:** MySQL  
+- **Banco de Dados:** MySQL
+- **Python-Decouple:** Ocultar variáveis importantes  
 - **ORM:** Django ORM (com ForeignKey para relacionar treinadores e pokémons)  
 - **Frontend:** Templates Django (HTML)  
 - **API:** Django REST Framework (DRF)  
 - **API Externa:** PokeAPI (https://pokeapi.co)  
-- **Ambiente Virtual:** venv  
+- **Ambiente Virtual:** venv
+-   
 
 ---
 
@@ -81,19 +83,39 @@ pip install -r requirements.txt
 CREATE DATABASE poke_trainer_db CHARACTER SET utf8mb4;
 ```
 
-- Configure o settings.py:
+- Em vez de colocar a senha diretamente no settings.py, use um arquivo .env para armazenar dados sensíveis:
+
+```env
+# .env
+DB_NAME=poke_trainer_db
+DB_USER=root
+DB_PASSWORD=SUA_SENHA
+DB_HOST=127.0.0.1
+DB_PORT=3306
+```
+
+- Configure o settings.py para ler essas variáveis com python-decouple:
 
 ```python
+from decouple import config
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'poke_trainer_db',
-        'USER': 'root',
-        'PASSWORD': 'SUA_SENHA',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default='3306'),
     }
 }
+```
+
+- Adicione o arquivo .env no .gitignore para não subir sua senha no GitHub:
+
+```bash
+# .gitignore
+.env
 ```
 
 5. **Rodar migrações**
