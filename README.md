@@ -1,8 +1,8 @@
-# Poké Trainer - Fábrica UniPE 25.2
+# Poké Trainer - Fábrica Unipe 25.2
 
-**Poké Trainer** é um projeto web em **Django** desenvolvido para a **Fábrica da UniPE 25.2**. O sistema permite que usuários criem seus próprios **treinadores**, capturem **Pokémons** e gerenciem suas coleções de forma completa.
+**Poké Trainer** é um projeto web desenvolvido em **Django** para a **Fábrica da Unipe 25.2**, que permite aos usuários criar seus próprios **treinadores Pokémon**, capturar e gerenciar suas coleções de forma completa, tanto via interface web quanto via **API REST**.  
 
-O projeto combina **CRUD completo**, integração com **MySQL**, **templates Django** para interface web e uma **API REST** com Django REST Framework para exibir dados em formato JSON.
+O sistema integra-se com a **PokeAPI**, uma API pública da internet que fornece **dados completos sobre todos os Pokémons**, incluindo nome, tipo, habilidades, estatísticas e imagens oficiais. Assim, cada Pokémon adicionado ao projeto é enriquecido com informações reais da franquia.
 
 ---
 
@@ -13,6 +13,7 @@ O projeto combina **CRUD completo**, integração com **MySQL**, **templates Dja
 - **ORM:** Django ORM (com ForeignKey para relacionar treinadores e pokémons)  
 - **Frontend:** Templates Django (HTML)  
 - **API:** Django REST Framework (DRF)  
+- **API Externa:** PokeAPI (https://pokeapi.co)  
 - **Ambiente Virtual:** venv  
 
 ---
@@ -21,21 +22,27 @@ O projeto combina **CRUD completo**, integração com **MySQL**, **templates Dja
 
 - **Apps:**
   - `treinadores` → CRUD completo para criar, atualizar, visualizar e deletar treinadores.
-  - `pokemons` → CRUD para adicionar, listar e remover pokémons dos treinadores.
+  - `pokemons` → CRUD para adicionar, listar, buscar e remover Pokémons de cada treinador.
 - **Relacionamento:** Cada Pokémon está vinculado a um treinador através de **ForeignKey**.
-- **Templates:** Interface web para visualização de treinadores e seus pokémons.
-- **API (DRF):** Endpoint para mostrar os dados dos pokémons em JSON.
+- **Templates:** Interface web para visualização de treinadores e seus Pokémons capturados.
+- **API (DRF):** Endpoints que retornam dados dos Pokémons e treinadores em **JSON**, permitindo integração com outras aplicações.
 
 ---
 
-## Funcionalidades
+## Funcionalidades Principais
 
-- Criar **Treinadores**.
-- Adicionar **Pokémons** aos treinadores.
-- Visualizar **perfil de cada treinador** com seus pokémons capturados.
-- Atualizar dados dos treinadores.
-- Deletar treinadores ou deletar **pokémons individualmente**.
-- API que retorna dados dos pokémons em **JSON**.
+- **Criar Treinadores:** Cada usuário pode criar seu próprio perfil de treinador Pokémon.  
+- **Capturar Pokémons:** É possível adicionar Pokémons à coleção do treinador. Os dados são buscados automaticamente na **PokeAPI**, retornando informações detalhadas como:
+  - Nome oficial
+  - Tipos (ex.: Fogo, Água, Elétrico)
+  - Estatísticas (HP, Ataque, Defesa, etc.)
+  - Habilidades
+  - Imagens oficiais  
+- **Consultar Pokémons:** Visualize detalhes completos de cada Pokémon capturado.  
+- **Gerenciar Coleção:** Atualize, remova ou adicione Pokémons à coleção do treinador.  
+- **Visualizar Perfil:** Veja todos os Pokémons capturados por cada treinador em uma interface organizada.  
+- **API REST:** Através da API, você pode consultar os dados de treinadores e Pokémons em formato JSON, possibilitando integração com outras aplicações ou frontends.  
+- **Pesquisa Dinâmica:** Busque informações sobre qualquer Pokémon via PokeAPI, retornando dados confiáveis da franquia.  
 
 ---
 
