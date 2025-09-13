@@ -31,7 +31,9 @@ O sistema integra-se com a **PokeAPI**, uma API pública da internet que fornece
 
 ## Funcionalidades Principais
 
-- **Criar Treinadores:** Cada usuário pode criar seu próprio perfil de treinador Pokémon.  
+- **Criar Treinadores:** Cada usuário pode criar seu próprio perfil de treinador Pokémon.
+- **Atualizar Treinador:** Depois de criado, é possível atualizar as informações do seu próprio treinador.  
+- **Deletar Treinador:** O usuário pode remover seu treinador do sistema, junto com todos os Pokémons associados.  
 - **Capturar Pokémons:** É possível adicionar Pokémons à coleção do treinador. Os dados são buscados automaticamente na **PokeAPI**, retornando informações detalhadas como:
   - Nome oficial
   - Tipos (ex.: Fogo, Água, Elétrico)
