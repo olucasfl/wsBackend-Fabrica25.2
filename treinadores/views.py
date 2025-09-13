@@ -38,3 +38,20 @@ class DeletarTreinadorView(View):
         treinador = get_object_or_404(Treinador, id=treinador_id)
         treinador.delete()
         return redirect('treinadores:home')
+    
+class AtualizarTreinadorView(View):
+    template_name = 'atualizar_treinador.html'
+    form_class = TreinadorForm
+
+    def get(self, request, treinador_id):
+        treinador = get_object_or_404(Treinador, id=treinador_id)
+        form = self.form_class(instance=treinador)
+        return render(request, self.template_name, {'form': form, 'treinador': treinador})
+
+    def post(self, request, treinador_id):
+        treinador = get_object_or_404(Treinador, id=treinador_id)
+        form = self.form_class(request.POST, instance=treinador)
+        if form.is_valid():
+            form.save()
+            return redirect('treinadores:perfil', treinador_id=treinador.id)
+        return render(request, self.template_name, {'form': form, 'treinador': treinador})

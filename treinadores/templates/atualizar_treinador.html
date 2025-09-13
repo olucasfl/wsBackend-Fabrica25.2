@@ -1,0 +1,9 @@
+<h2>Editar Treinador: {{ treinador.nome }}</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Salvar Alterações</button>
+</form>
+
+<p><a href="{% url 'treinadores:perfil' treinador.id %}">Cancelar</a></p>

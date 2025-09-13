@@ -3,6 +3,9 @@
 <div>
   <p><strong>Idade:</strong> {{ treinador.idade }}</p>
   <p><strong>Cidade:</strong> {{ treinador.cidade }}</p>
+  <form method="post" action="{% url 'treinadores:atualizar' treinador.id %}">
+    {% csrf_token %}
+    <button type="submit">Atualizar dados</button>
 </div>
 
 <hr />
