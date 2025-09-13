@@ -4,6 +4,8 @@ from .forms import PokemonSearchForm
 from .models import Pokemon
 from treinadores.models import Treinador
 from django.shortcuts import redirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
 import requests
 
 class CapturarPokemonView(View):
@@ -46,3 +48,22 @@ class DeletarPokemonView(View):
         pokemon = get_object_or_404(Pokemon, id=pokemon_id, treinador_id=treinador_id)
         pokemon.delete()
         return redirect('treinadores:perfil', treinador_id=treinador_id)
+    
+class PokemonDetailAPI(APIView):
+    def get(self, request, treinador_id, name):
+            p = get_object_or_404(Pokemon, treinador_id=treinador_id, nome=name)
+            data = {
+                "name": p.nome,
+                "sprite": p.sprite,
+                "types": p.tipos.split(","),
+                "stats": p.stats
+            }
+            return Response(data)
+    
+class PokemonDetailView(View):
+    template_name = 'detalhes_pokemon.html'
+
+    def get(self, request, treinador_id, name):
+        treinador = get_object_or_404(Treinador, id=treinador_id)
+        pokemon = get_object_or_404(Pokemon, treinador_id=treinador_id, nome=name)
+        return render(request, self.template_name, {"pokemon": pokemon, "treinador": treinador})

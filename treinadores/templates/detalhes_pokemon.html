@@ -1,0 +1,14 @@
+<h2>Detalhes do Pokémon: {{ pokemon.nome }}</h2>
+<img src="{{ pokemon.sprite }}" alt="{{ pokemon.nome }}">
+<p><strong>Tipos:</strong> {{ pokemon.tipos }}</p>
+<p><strong>Status:</strong></p>
+<ul>
+  {% for key, value in pokemon.stats.items %}
+    <li>{{ key }}: {{ value }}</li>
+  {% endfor %}
+</ul>
+<hr>  
+
+<a href="{% url 'pokemons:detalhes_pokemon_json' treinador.id pokemon.nome %}">
+  Detalhes JSON (DRF)
+</a>

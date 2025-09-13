@@ -16,17 +16,20 @@
   <li>
     <strong>{{ p.nome }}</strong> - Tipo(s): {{ p.tipos }}
     {% if p.sprite %}
-    <br />
-    <img src="{{ p.sprite }}" alt="{{ p.nome }}" style="width: 80px; height: 80px" />
+      <br />
+      <img src="{{ p.sprite }}" alt="{{ p.nome }}" style="width: 80px; height: 80px" />
     {% endif %}
 
     <form method="post" action="{% url 'pokemons:delete' treinador.id p.id %}" style="display:inline;">
       {% csrf_token %}
       <button type="submit">Excluir</button>
     </form>
+
+    <a href="{% url 'pokemons:detalhes_pokemon_view' treinador.id p.nome %}">Ver detalhes</a>
+
   </li>
   {% empty %}
-  <li>Este treinador ainda não capturou nenhum Pokémon.</li>
+    <li>Este treinador ainda não capturou nenhum Pokémon.</li>
   {% endfor %}
 </ul>
 
