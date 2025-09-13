@@ -16,6 +16,11 @@
     <br />
     <img src="{{ p.sprite }}" alt="{{ p.nome }}" style="width: 80px; height: 80px" />
     {% endif %}
+
+    <form method="post" action="{% url 'pokemons:delete' treinador.id p.id %}" style="display:inline;">
+      {% csrf_token %}
+      <button type="submit">Excluir</button>
+    </form>
   </li>
   {% empty %}
   <li>Este treinador ainda não capturou nenhum Pokémon.</li>
@@ -30,4 +35,8 @@
   </p>
   <p><a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a></p>
   <p><a href="{% url 'treinadores:lista' %}">Ver todos os treinadores registrados</a></p>
+  <p></p>
+  <form method="post" action="{% url 'treinadores:deletar' treinador.id %}">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este treinador? Esta ação não pode ser desfeita.')">Excluir Treinador</button>
 </div>

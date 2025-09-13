@@ -32,3 +32,9 @@ class PerfilTreinadorView(View):
     def get(self, request, treinador_id):
         treinador = get_object_or_404(Treinador, id=treinador_id)
         return render(request, self.template_name, {'treinador': treinador})
+    
+class DeletarTreinadorView(View):
+    def post(self, request, treinador_id):
+        treinador = get_object_or_404(Treinador, id=treinador_id)
+        treinador.delete()
+        return redirect('treinadores:home')

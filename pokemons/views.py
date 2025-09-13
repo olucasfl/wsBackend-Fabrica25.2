@@ -3,6 +3,7 @@ from django.views import View
 from .forms import PokemonSearchForm
 from .models import Pokemon
 from treinadores.models import Treinador
+from django.shortcuts import redirect
 import requests
 
 class CapturarPokemonView(View):
@@ -39,3 +40,9 @@ class CapturarPokemonView(View):
                 context["error"] = f"Não foi possível capturar '{name.capitalize()}'. Pokémon não encontrado."
 
         return render(request, self.template_name, context)
+    
+class DeletarPokemonView(View):
+    def post(self, request, treinador_id, pokemon_id):
+        pokemon = get_object_or_404(Pokemon, id=pokemon_id, treinador_id=treinador_id)
+        pokemon.delete()
+        return redirect('treinadores:perfil', treinador_id=treinador_id)
