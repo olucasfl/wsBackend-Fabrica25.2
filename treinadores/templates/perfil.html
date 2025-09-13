@@ -1,11 +1,33 @@
 <h2>{{ treinador.nome }} (Nível {{ treinador.nivel }})</h2>
-<p>Idade: {{ treinador.idade }}</p>
-<p>Cidade: {{ treinador.cidade }}</p>
 
-{% comment %}
-<a href="{% url 'pokemons:captura' treinador.id %}">Capturar Pokémon</a>
-<a href="{% url 'pokemons:lista' treinador.id %}">Ver Pokémons Capturados</a>
-{% endcomment %}
+<div>
+  <p><strong>Idade:</strong> {{ treinador.idade }}</p>
+  <p><strong>Cidade:</strong> {{ treinador.cidade }}</p>
+</div>
 
-<a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a>
-<a href="{% url 'treinadores:home' %}">Ver treinadores registrados</a>
+<hr />
+
+<h3>Pokémons Capturados por {{ treinador.nome }}</h3>
+<ul>
+  {% for p in treinador.pokemons.all %}
+  <li>
+    <strong>{{ p.nome }}</strong> - Tipo(s): {{ p.tipos }}
+    {% if p.sprite %}
+    <br />
+    <img src="{{ p.sprite }}" alt="{{ p.nome }}" style="width: 80px; height: 80px" />
+    {% endif %}
+  </li>
+  {% empty %}
+  <li>Este treinador ainda não capturou nenhum Pokémon.</li>
+  {% endfor %}
+</ul>
+
+<hr />
+
+<div>
+  <p>
+    <a href="{% url 'pokemons:captura' treinador.id %}">Capturar novo Pokémon</a>
+  </p>
+  <p><a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a></p>
+  <p><a href="{% url 'treinadores:lista' %}">Ver todos os treinadores registrados</a></p>
+</div>

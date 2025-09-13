@@ -1,0 +1,18 @@
+<h1>Capture o seu Pokémon!</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Capturar</button>
+</form>
+
+{% if success %}
+  <p>Parabéns {{ treinador.nome }}! Você capturou {{ pokemon.nome|capfirst }}!</p>
+{% elif error %}
+  <p>{{ error }}</p>
+{% endif %}
+<p>
+  <a href="{% url 'treinadores:perfil' treinador.id %}">Ver perfil</a> |
+  <a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a> |
+  <a href="{% url 'treinadores:lista' %}">Ver todos os treinadores</a>
+</p>
