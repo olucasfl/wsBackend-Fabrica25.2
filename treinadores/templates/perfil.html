@@ -1,48 +1,58 @@
-<h2>{{ treinador.nome }} (Nível {{ treinador.nivel }})</h2>
+{% extends 'base.html' %}
 
-<div>
-  <p><strong>Idade:</strong> {{ treinador.idade }}</p>
-  <p><strong>Cidade:</strong> {{ treinador.cidade }}</p>
-  <form method="post" action="{% url 'treinadores:atualizar' treinador.id %}">
-    {% csrf_token %}
-    <button type="submit">Atualizar dados</button>
+{% block title %}Perfil de {{ treinador.nome }}{% endblock %}
+
+{% block content %}
+<div class="perfil-container">
+    <div class="card perfil-card">
+        <h2 class="perfil-nome">{{ treinador.nome }} (Nível {{ treinador.nivel }})</h2>
+
+        <div class="perfil-info">
+            <p><strong>Idade:</strong> {{ treinador.idade }}</p>
+            <p><strong>Cidade:</strong> {{ treinador.cidade }}</p>
+            <form method="post" action="{% url 'treinadores:atualizar' treinador.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-perfil">Atualizar dados</button>
+            </form>
+        </div>
+
+        <hr />
+
+        <h3 class="perfil-subtitle">Pokémons Capturados por {{ treinador.nome }}</h3>
+        <ul class="pokemon-list">
+            {% for p in treinador.pokemons.all %}
+            <li class="pokemon-item">
+                <strong>{{ p.nome }}</strong> - Tipo(s): {{ p.tipos }}
+                {% if p.sprite %}
+                    <br />
+                    <img src="{{ p.sprite }}" alt="{{ p.nome }}" class="pokemon-sprite" />
+                {% endif %}
+
+                <div class="pokemon-actions">
+                    <form method="post" action="{% url 'pokemons:delete' treinador.id p.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-pokemon-delete">Excluir</button>
+                    </form>
+                    <a href="{% url 'pokemons:detalhes_pokemon_view' treinador.id p.nome %}" class="link-pokemon">Ver detalhes</a>
+                </div>
+            </li>
+            {% empty %}
+            <li>Este treinador ainda não capturou nenhum Pokémon.</li>
+            {% endfor %}
+        </ul>
+
+        <hr />
+
+        <div class="perfil-links">
+            <p><a href="{% url 'pokemons:captura' treinador.id %}" class="btn-perfil-link">Capturar novo Pokémon</a></p>
+            <p><a href="{% url 'treinadores:home' %}" class="btn-perfil-link">Voltar para a página inicial</a></p>
+            <p><a href="{% url 'treinadores:lista' %}" class="btn-perfil-link">Ver todos os treinadores registrados</a></p>
+
+            <form method="post" action="{% url 'treinadores:deletar' treinador.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir este treinador? Esta ação não pode ser desfeita.')">Excluir Treinador</button>
+            </form>
+        </div>
+    </div>
 </div>
-
-<hr />
-
-<h3>Pokémons Capturados por {{ treinador.nome }}</h3>
-<ul>
-  {% for p in treinador.pokemons.all %}
-  <li>
-    <strong>{{ p.nome }}</strong> - Tipo(s): {{ p.tipos }}
-    {% if p.sprite %}
-      <br />
-      <img src="{{ p.sprite }}" alt="{{ p.nome }}" style="width: 80px; height: 80px" />
-    {% endif %}
-
-    <form method="post" action="{% url 'pokemons:delete' treinador.id p.id %}" style="display:inline;">
-      {% csrf_token %}
-      <button type="submit">Excluir</button>
-    </form>
-
-    <a href="{% url 'pokemons:detalhes_pokemon_view' treinador.id p.nome %}">Ver detalhes</a>
-
-  </li>
-  {% empty %}
-    <li>Este treinador ainda não capturou nenhum Pokémon.</li>
-  {% endfor %}
-</ul>
-
-<hr />
-
-<div>
-  <p>
-    <a href="{% url 'pokemons:captura' treinador.id %}">Capturar novo Pokémon</a>
-  </p>
-  <p><a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a></p>
-  <p><a href="{% url 'treinadores:lista' %}">Ver todos os treinadores registrados</a></p>
-  <p></p>
-  <form method="post" action="{% url 'treinadores:deletar' treinador.id %}">
-    {% csrf_token %}
-    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir este treinador? Esta ação não pode ser desfeita.')">Excluir Treinador</button>
-</div>
+{% endblock %}

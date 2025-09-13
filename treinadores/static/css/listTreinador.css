@@ -1,0 +1,99 @@
+.listTreinador-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.listTreinador-card {
+    background: radial-gradient(circle at top left, #fff, #ffd700);
+    border: 4px solid #ff1c1c;
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
+
+.listTreinador-card h2 {
+    color: #ff1c1c;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #fceabb;
+}
+
+.pokemon-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pokemon-item {
+    border: 2px solid #ff1c1c;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #fff8dc;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.pokemon-item:hover {
+    background-color: #fff0b3;
+    transform: scale(1.02);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.link-pokemon {
+    color: #0984e3;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.link-pokemon:hover {
+    color: #74b9ff;
+}
+
+.perfil-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-perfil-link {
+    background: linear-gradient(to right, #ff1c1c, #ffcc00);
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid #ff1c1c;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-perfil-link:hover {
+    background: linear-gradient(to right, #ffcc00, #ff1c1c);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+    .listTreinador-card {
+        width: 95%;
+        padding: 20px;
+    }
+    .pokemon-item {
+        font-size: 12px;
+        padding: 10px;
+    }
+    .btn-perfil-link {
+        font-size: 10px;
+        padding: 8px 15px;
+    }
+}

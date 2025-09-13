@@ -1,18 +1,29 @@
-<h1>Capture o seu Pokémon!</h1>
+{% extends 'base.html' %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Capturar</button>
-</form>
+{% block title %}Capturar Pokémon{% endblock %}
 
-{% if success %}
-  <p>Parabéns {{ treinador.nome }}! Você capturou {{ pokemon.nome|capfirst }}!</p>
-{% elif error %}
-  <p>{{ error }}</p>
-{% endif %}
-<p>
-  <a href="{% url 'treinadores:perfil' treinador.id %}">Ver perfil</a> |
-  <a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a> |
-  <a href="{% url 'treinadores:lista' %}">Ver todos os treinadores</a>
-</p>
+{% block content %}
+<div class="captura-container">
+    <div class="captura-card">
+        <h1 class="captura-title">Capture o seu Pokémon!</h1>
+
+        <form method="post" class="captura-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-captura">Capturar</button>
+        </form>
+
+        {% if success %}
+            <p class="captura-success">Parabéns {{ treinador.nome }}! Você capturou {{ pokemon.nome|capfirst }}!</p>
+        {% elif error %}
+            <p class="captura-error">{{ error }}</p>
+        {% endif %}
+
+        <div class="perfil-links">
+            <a href="{% url 'treinadores:perfil' treinador.id %}" class="btn-perfil-link">Ver perfil</a>
+            <a href="{% url 'treinadores:home' %}" class="btn-perfil-link">Voltar para a página inicial</a>
+            <a href="{% url 'treinadores:lista' %}" class="btn-perfil-link">Ver todos os treinadores</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Pokémon Trainer{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/listTreinador.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pokemon-detail.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editar-treinador.css' %}">
+    <link rel="stylesheet" href="{% static 'css/captura.css' %}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="{% url 'treinadores:home' %}" class="header-logo">Pokémon Trainer</a>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

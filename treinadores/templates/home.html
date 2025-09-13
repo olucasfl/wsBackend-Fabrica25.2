@@ -1,6 +1,22 @@
-<h1>Seja bem-vindo!</h1>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Continuar</button>
-</form>
-<a href="{% url 'treinadores:lista' %}">Ver treinadores já registrados</a>
+{% extends 'base.html' %}
+
+{% block title %}Início - Pokémon Trainer{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="card home-card">
+        <h1 class="home-title">Seja bem-vindo, futuro treinador!</h1>
+        <p class="home-subtitle">Crie seu treinador e comece sua jornada Pokémon!</p>
+
+        <form method="post" class="home-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-home">Continuar</button>
+        </form>
+
+        <p class="home-link">
+            <a href="{% url 'treinadores:lista' %}">Ver treinadores já registrados</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,12 +1,27 @@
-<h2>Todos os Treinadores</h2>
-<ul>
-  {% for treinador in treinadores %}
-  <li>
-    <a href="{% url 'treinadores:perfil' treinador.id %}">
-      {{ treinador.nome }} (Nível {{ treinador.nivel }})
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+{% extends 'base.html' %}
 
-<a href="{% url 'treinadores:home' %}">Voltar para a página inicial</a>
+{% block title %}Treinadores Registrados{% endblock %}
+
+{% block content %}
+<div class="listTreinador-container">
+    <div class="card perfil-card">
+        <h2 class="perfil-nome">Todos os Treinadores</h2>
+
+        <ul class="pokemon-list">
+            {% for treinador in treinadores %}
+            <li class="pokemon-item">
+                <a href="{% url 'treinadores:perfil' treinador.id %}" class="link-pokemon">
+                    {{ treinador.nome }} (Nível {{ treinador.nivel }})
+                </a>
+            </li>
+            {% empty %}
+            <li>Nenhum treinador registrado ainda.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="perfil-links">
+            <a href="{% url 'treinadores:home' %}" class="btn-perfil-link">Voltar para a página inicial</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

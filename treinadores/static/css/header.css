@@ -1,0 +1,29 @@
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to right, #ffcc00, #ff1c1c);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.header-logo:hover {
+    color: #ffe600;
+    transform: scale(1.05);
+}

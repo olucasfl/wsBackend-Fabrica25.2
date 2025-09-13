@@ -1,14 +1,35 @@
-<h2>Detalhes do Pokémon: {{ pokemon.nome }}</h2>
-<img src="{{ pokemon.sprite }}" alt="{{ pokemon.nome }}">
-<p><strong>Tipos:</strong> {{ pokemon.tipos }}</p>
-<p><strong>Status:</strong></p>
-<ul>
-  {% for key, value in pokemon.stats.items %}
-    <li>{{ key }}: {{ value }}</li>
-  {% endfor %}
-</ul>
-<hr>  
+{% extends 'base.html' %}
 
-<a href="{% url 'pokemons:detalhes_pokemon_json' treinador.id pokemon.nome %}">
-  Detalhes JSON (DRF)
-</a>
+{% block title %}Detalhes de {{ pokemon.nome }}{% endblock %}
+
+{% block content %}
+<div class="pokemon-detail-container">
+    <div class="pokemon-detail-card">
+        <h2 class="perfil-nome">Detalhes do Pokémon: {{ pokemon.nome }}</h2>
+        
+        {% if pokemon.sprite %}
+        <img src="{{ pokemon.sprite }}" alt="{{ pokemon.nome }}" class="pokemon-sprite-detail">
+        {% endif %}
+
+        <p><strong>Tipos:</strong> {{ pokemon.tipos }}</p>
+        
+        <p><strong>Status:</strong></p>
+        <ul class="pokemon-stats">
+            {% for key, value in pokemon.stats.items %}
+            <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+
+        <hr>
+
+        <div class="perfil-links pokemon-detail-links">
+            <a href="{% url 'pokemons:detalhes_pokemon_json' treinador.id pokemon.nome %}" class="btn-perfil-link">
+                Detalhes JSON (DRF)
+            </a>
+            <a href="{% url 'treinadores:perfil' treinador.id %}" class="btn-perfil-link">
+                Voltar ao Perfil do Treinador
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

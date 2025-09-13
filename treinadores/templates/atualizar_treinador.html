@@ -1,9 +1,19 @@
-<h2>Editar Treinador: {{ treinador.nome }}</h2>
+{% extends 'base.html' %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Salvar Alterações</button>
-</form>
+{% block title %}Editar Treinador: {{ treinador.nome }}{% endblock %}
 
-<p><a href="{% url 'treinadores:perfil' treinador.id %}">Cancelar</a></p>
+{% block content %}
+<div class="editar-container">
+    <div class="editar-card">
+        <h2 class="editar-title">Editar Treinador: {{ treinador.nome }}</h2>
+
+        <form method="post" class="editar-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-editar">Salvar Alterações</button>
+        </form>
+
+        <a href="{% url 'treinadores:perfil' treinador.id %}" class="btn-cancelar">Cancelar</a>
+    </div>
+</div>
+{% endblock %}
